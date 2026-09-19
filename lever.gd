@@ -1,7 +1,7 @@
 extends Sprite2D
 
 @onready var mechlever: Sprite2D = $Mechlever
-@export var door: Node2D
+@export var door: Array[Node2D]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_parent().name == "main":
@@ -12,9 +12,9 @@ func _on_area_2d_area_exit(area: Area2D) -> void:
 		area.get_parent().tpzone = null
 
 func tp(main:CharacterBody2D):
-	mechlever.rotation_degrees = -90
 	var tween:Tween = create_tween()
-	tween.tween_property(mechlever, "rotation_degrees", 90, 1)
+	tween.tween_property(mechlever, "rotation_degrees", mechlever.rotation_degrees * -1, 1)
 	await tween.finished
-	door.open()
+	for i in door:
+		await i.open()
 	main.move = true
