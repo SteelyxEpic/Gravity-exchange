@@ -15,6 +15,9 @@ func _physics_process(delta: float) -> void:
 	$Recorder.scale.y = abs($Recorder.scale.y) * (-1 if OppositeGravity else 1)
 	up_direction = Vector2(0, 1 if OppositeGravity else -1)
 	camera.zoom = Vector2(1, -1 if OppositeGravity else 1) * 3
+	$Time.position.x = abs($Time.position.x) * (-1 if OppositeGravity else 1)
+	$Time.position.y = abs($Time.position.y) * (1 if OppositeGravity else -1)
+	$Time.scale.y = abs($Time.scale.y) * (-1 if OppositeGravity else 1)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta  * (-1 if OppositeGravity else 1)
