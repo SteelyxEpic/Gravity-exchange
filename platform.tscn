@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://bkyvh1vh20xdb"]
+
+[ext_resource type="Texture2D" uid="uid://b32trfhdo5fo7" path="res://platform.png" id="1_ph1ng"]
+[ext_resource type="Script" uid="uid://13f6d7jbrncl" path="res://gravity.gd" id="2_7u0im"]
+[ext_resource type="Texture2D" uid="uid://bftbqkmqypbwj" path="res://tprotate.png" id="3_x8osn"]
+[ext_resource type="Texture2D" uid="uid://br0gndo1kebt6" path="res://tpro.png" id="4_ardar"]
+[ext_resource type="AudioStream" uid="uid://bngwgt0xrlqxm" path="res://rotato.mp3" id="5_xucfa"]
+
+[sub_resource type="Animation" id="Animation_ryrav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tprotate:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [18.849556]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tprotate/Tpro:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tprotate/Tpro:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_j5wjh"]
+resource_name = "rotate"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tprotate:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 56.548668]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tprotate/Tpro:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.6, 0.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tprotate/Tpro:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5000001, 3.5000002),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vef74"]
+_data = {
+&"RESET": SubResource("Animation_ryrav"),
+&"rotate": SubResource("Animation_j5wjh")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mti6b"]
+size = Vector2(606.98413, 199.7945)
+
+[node name="Platform" type="Sprite2D" unique_id=1844784526]
+scale = Vector2(0.192, 0.19)
+texture = ExtResource("1_ph1ng")
+script = ExtResource("2_7u0im")
+
+[node name="Tprotate" type="Sprite2D" parent="." unique_id=900814151]
+visible = false
+position = Vector2(-26.042, -737.645)
+rotation = 18.849556
+texture = ExtResource("3_x8osn")
+
+[node name="Tpro" type="Sprite2D" parent="Tprotate" unique_id=1187551550]
+visible = false
+position = Vector2(-10.199219, -2.6689453)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_ardar")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1567793503]
+libraries/ = SubResource("AnimationLibrary_vef74")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1798983079]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2014144862]
+position = Vector2(-7.5874023, 10.515869)
+shape = SubResource("RectangleShape2D_mti6b")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=720811357]
+stream = ExtResource("5_xucfa")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exit"]

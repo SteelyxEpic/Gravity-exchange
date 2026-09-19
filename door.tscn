@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://bjm6jy43ybqdu"]
+
+[ext_resource type="Script" uid="uid://b8i37umkic607" path="res://door.gd" id="1_0phs7"]
+[ext_resource type="Texture2D" uid="uid://cf66qhnxdfdy5" path="res://door.png" id="2_50cdl"]
+[ext_resource type="AudioStream" uid="uid://cmuc7rbtx2xr1" path="res://opendoor.mp3" id="3_y5njw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm1bc"]
+size = Vector2(1010.3467, 230.20166)
+
+[sub_resource type="Animation" id="Animation_lc2xo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1064, -407)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-842, -407)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_215e1"]
+resource_name = "door"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.12),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1064, -407), Vector2(-1080.447, -407), Vector2(-1183.955, -407)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.12),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-842, -407), Vector2(-825.486, -407), Vector2(-672.44, -407)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sc4i"]
+_data = {
+&"RESET": SubResource("Animation_lc2xo"),
+&"door": SubResource("Animation_215e1")
+}
+
+[node name="door" type="Node2D" unique_id=1023490267]
+z_index = -1
+script = ExtResource("1_0phs7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1794890854]
+position = Vector2(-1064, -407)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1788307241]
+position = Vector2(953.0001, 405.5)
+scale = Vector2(0.21972649, 0.1259765)
+shape = SubResource("RectangleShape2D_mm1bc")
+
+[node name="Door" type="Sprite2D" parent="StaticBody2D" unique_id=339378588]
+position = Vector2(955, 417)
+scale = Vector2(0.21972656, 0.12597656)
+texture = ExtResource("2_50cdl")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=548716667]
+position = Vector2(-842, -407)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1513557851]
+position = Vector2(953.0001, 405.5)
+scale = Vector2(0.21972649, 0.1259765)
+shape = SubResource("RectangleShape2D_mm1bc")
+
+[node name="Door2" type="Sprite2D" parent="StaticBody2D2" unique_id=1460212957]
+position = Vector2(951, 417)
+rotation = 3.1415927
+scale = Vector2(0.22, -0.126)
+texture = ExtResource("2_50cdl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=419180589]
+libraries/ = SubResource("AnimationLibrary_7sc4i")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=545500859]
+stream = ExtResource("3_y5njw")

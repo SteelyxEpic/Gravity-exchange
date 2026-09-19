@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://naluyx3sd7pe"]
+
+[ext_resource type="Texture2D" uid="uid://b1mfwy1s8sw06" path="res://mechleverbase.png" id="1_rvicq"]
+[ext_resource type="Script" uid="uid://cq4s0e8k1bonl" path="res://lever.gd" id="2_jgnwf"]
+[ext_resource type="Texture2D" uid="uid://dkvu3xwvjdu1i" path="res://mechlever.png" id="3_0wei0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62yky"]
+size = Vector2(400.00195, 141.17627)
+
+[node name="Mechleverbase" type="Sprite2D" unique_id=1102823986]
+scale = Vector2(0.08499999, 0.08499999)
+texture = ExtResource("1_rvicq")
+script = ExtResource("2_jgnwf")
+
+[node name="Mechlever" type="Sprite2D" parent="." unique_id=1562228435]
+position = Vector2(-58.82422, -23.529785)
+rotation = -1.5707964
+texture = ExtResource("3_0wei0")
+offset = Vector2(60.82422, 13.529785)
+
+[node name="lever" type="Area2D" parent="." unique_id=1059844123]
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lever" unique_id=2053983509]
+position = Vector2(-58.82422, -11.764648)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_62yky")
+
+[connection signal="area_entered" from="lever" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="lever" to="." method="_on_area_2d_area_exit"]
