@@ -35,7 +35,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_mfdv2"]
 resource_name = "walk"
-length = 0.39999999999999997
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -459,10 +459,18 @@ vertical_alignment = 1
 
 [node name="Time" type="RichTextLabel" parent="main" unique_id=1283463683]
 z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = 105.0
-offset_top = -97.737564
+offset_top = -97.73756
 offset_right = 192.0
-offset_bottom = -70.58824
+offset_bottom = -70.588234
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(45, 14.479645)
 text = "Time"
 horizontal_alignment = 1
 vertical_alignment = 1
